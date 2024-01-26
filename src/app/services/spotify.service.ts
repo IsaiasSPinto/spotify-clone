@@ -16,7 +16,8 @@ export class SpotifyService {
   }
 
   async initUser() {
-    if (!!this.user) return false;
+    debugger;
+    if (!!this.user) return true;
 
     const token = localStorage.getItem('token');
 
@@ -34,6 +35,7 @@ export class SpotifyService {
 
   async getUser() {
     const user = await this.spotifyApi.getMe();
+    console.log(user);
     this.user = SpotifyUserMapToIUser(user);
   }
 
@@ -58,7 +60,7 @@ export class SpotifyService {
   }
 
   setAccessToken(token: string) {
-    this.spotifyApi.setAccessToken(token);
     localStorage.setItem('token', token);
+    this.spotifyApi.setAccessToken(token);
   }
 }

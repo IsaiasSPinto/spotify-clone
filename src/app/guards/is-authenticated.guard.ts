@@ -9,17 +9,20 @@ export const isAuthenticatedGuard: CanActivateFn = (route, state) => {
   const token = localStorage.getItem('token');
 
   if (!token) {
-    naoAutenticado();
+    localStorage.clear();
+    router.navigate(['/login']);
+    return false;
   }
 
-  return new Promise((res) => {
-    const result = spotifyService.initUser();
+  return new Promise(async (res) => {
+    const result = await spotifyService.initUser();
 
     if (!result) {
-      res(naoAutenticado());
+      localStorage.clear();
+      router.navigate(['/login']);
+      res(false);
     }
 
-    router.navigate(['/player']);
     res(result);
   });
 };

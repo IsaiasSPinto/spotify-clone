@@ -6,6 +6,6 @@ export function SpotifyUserMapToIUser(
   return {
     id: user.id,
     name: user.display_name,
-    imageUrl: user.images.pop().url,
+    imageUrl: user.images.length > 0 ? user.images.pop().url : '',
   };
 }
