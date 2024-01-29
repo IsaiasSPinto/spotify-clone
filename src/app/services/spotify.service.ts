@@ -3,9 +3,11 @@ import { spotifyConfiguration } from '../../environments/environment';
 import Spotify from 'spotify-web-api-js';
 import { IUser } from '../interfaces/IUser';
 import {
+  SpotifyArtistMapToIArtist,
   SpotifyPlaylistMapToIPlaylist,
   SpotifyUserMapToIUser,
 } from '../Common/spotifyHelpers';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -14,12 +16,11 @@ export class SpotifyService {
   spotifyApi: Spotify.SpotifyWebApiJs;
   user: IUser;
 
-  constructor() {
+  constructor(private router: Router) {
     this.spotifyApi = new Spotify();
   }
 
   async initUser() {
-    debugger;
     if (!!this.user) return true;
 
     const token = localStorage.getItem('token');
@@ -74,5 +75,16 @@ export class SpotifyService {
     });
 
     return playlists.items.map(SpotifyPlaylistMapToIPlaylist);
+  }
+
+  async getTopArtists(limit = 10) {
+    const artists = await this.spotifyApi.getMyTopArtists({ limit });
+
+    return artists.items.map(SpotifyArtistMapToIArtist);
+  }
+
+  logout() {
+    localStorage.clear();
+    this.router.navigate(['/login']);
   }
 }

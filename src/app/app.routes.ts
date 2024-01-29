@@ -14,8 +14,8 @@ export const routes: Routes = [
   },
   {
     path: 'player',
-    loadComponent: () =>
-      import('./pages/player/player.component').then((m) => m.PlayerComponent),
+    loadChildren: () =>
+      import('./pages/player/player.routes').then((m) => m.playerRoutes),
     canActivate: [isAuthenticatedGuard],
   },
 ];

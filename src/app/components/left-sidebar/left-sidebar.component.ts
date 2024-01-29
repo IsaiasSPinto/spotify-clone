@@ -10,11 +10,18 @@ import {
 import { IPlaylist } from '../../interfaces/IPlaylist';
 import { SpotifyService } from '../../services/spotify.service';
 import { CommonModule } from '@angular/common';
+import { UserFooterComponent } from '../userFooter/userFooter.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-left-sidebar',
   standalone: true,
-  imports: [MenuButtonComponent, FontAwesomeModule, CommonModule],
+  imports: [
+    MenuButtonComponent,
+    FontAwesomeModule,
+    CommonModule,
+    UserFooterComponent,
+  ],
   templateUrl: './left-sidebar.component.html',
   styleUrl: './left-sidebar.component.scss',
 })
@@ -28,7 +35,7 @@ export class LeftSidebarComponent implements OnInit {
   artistIcon = faUser;
   playlistIcon = faList;
 
-  constructor(private spotifyService: SpotifyService) {}
+  constructor(private router: Router, private spotifyService: SpotifyService) {}
 
   ngOnInit(): void {
     this.getPlaylists();
@@ -36,6 +43,7 @@ export class LeftSidebarComponent implements OnInit {
 
   onMenuButtonClick(button: string) {
     this.selectedButton = button;
+    this.router.navigateByUrl(`/player/${button.toLowerCase()}`);
   }
 
   async getPlaylists() {
