@@ -1,0 +1,38 @@
+@import  'variables';
+
+:host {
+  display: block;
+  width: 100%;
+
+
+  button {
+    background-color: transparent;
+    width: 100%;
+    padding: 10px 0 10px 20px;
+
+    border: 0;
+    border-radius: 5px;
+
+    text-align: left;
+    font-weight: 600;
+    font-size: .8rem;
+    color: $primary;
+
+    cursor: pointer;
+
+    span {
+      display: inline-block;
+      vertical-align: middle;
+      width: 150px;
+      white-space: nowrap;
+      margin-left: 15px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    &.selected {
+      color: $background;
+      background-color: $primary;
+    }
+  }
+}

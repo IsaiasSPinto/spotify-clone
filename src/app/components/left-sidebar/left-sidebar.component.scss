@@ -2,6 +2,7 @@
 $h-spotify-logo: 120px;
 $h-menu-opcoes: 150px;
 $m-bt-menu: 10px;
+
 :host {
  max-width: 300px;
  min-height: 100vh;
@@ -30,9 +31,43 @@ $m-bt-menu: 10px;
 
   .menu-container {
     width: 100%;
+
+    &.flex {
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+    }
+
+    &.opcoes {
+      min-height: $h-menu-opcoes;
+
+      * {
+        margin-bottom: $m-bt-menu;
+      }
+    }
+
+    .playlist-title {
+      margin: 10px 0;
+      align-self: flex-start;
+      font-weight: 700;
+      font-size: .7rem;
+      color: $black-tranparent;
+      text-transform: uppercase;
+    }
+
+    .playlist-scroll {
+      width: 100%;
+      max-height: 50vh;
+      overflow-y: auto;
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
+
+      * {
+        margin-bottom: $m-bt-menu;
+      }
+    }
   }
 
-  &.opcoes {
-    min-height: $h-menu-opcoes;
-  }
 }
